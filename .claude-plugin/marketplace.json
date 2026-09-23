@@ -1,0 +1,24 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "trace",
+  "owner": {
+    "name": "Trace"
+  },
+  "description": "The Trace MCP Plugin: connects agents to the Trace metric tree analytics platform.",
+  "plugins": [
+    {
+      "name": "trace",
+      "source": "./plugins/trace",
+      "description": "Connects the agent to Trace, a metric tree analytics platform, and teaches it to ask Trace Analyst about the business data and relay the answer faithfully.",
+      "category": "integrations",
+      "keywords": [
+        "trace",
+        "analytics",
+        "metrics",
+        "metric-tree",
+        "business-intelligence",
+        "mcp"
+      ]
+    }
+  ]
+}

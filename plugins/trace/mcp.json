@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "TraceAnalyst": {
+      "type": "http",
+      "url": "https://app-api.hellotrace.app/mcp"
+    }
+  }
+}

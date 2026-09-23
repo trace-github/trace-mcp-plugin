@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "trace",
+  "displayName": "Trace",
+  "version": "0.1.0",
+  "description": "Connects the agent to Trace, a metric tree analytics platform, and teaches it to ask Trace Analyst about the business data and relay the answer faithfully.",
+  "author": {
+    "name": "Trace"
+  },
+  "homepage": "https://www.hellotrace.io",
+  "keywords": [
+    "trace",
+    "analytics",
+    "metrics",
+    "metric-tree",
+    "business-intelligence",
+    "mcp"
+  ],
+  "mcpServers": "./mcp.json"
+}

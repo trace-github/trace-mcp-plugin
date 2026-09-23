@@ -1,0 +1,26 @@
+{
+  "name": "trace",
+  "displayName": "Trace",
+  "version": "0.1.0",
+  "description": "Connects the agent to Trace, a metric tree analytics platform, and teaches it to ask Trace Analyst about the business data and relay the answer faithfully.",
+  "author": {
+    "name": "Trace"
+  },
+  "homepage": "https://www.hellotrace.io",
+  "logo": "assets/logo.png",
+  "category": "integrations",
+  "keywords": [
+    "trace",
+    "analytics",
+    "metrics",
+    "metric-tree",
+    "business-intelligence",
+    "mcp"
+  ],
+  "tags": [
+    "analytics",
+    "metrics",
+    "data"
+  ],
+  "mcpServers": "./mcp.json"
+}

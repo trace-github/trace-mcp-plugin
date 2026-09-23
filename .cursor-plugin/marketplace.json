@@ -1,0 +1,16 @@
+{
+  "name": "trace",
+  "owner": {
+    "name": "Trace"
+  },
+  "metadata": {
+    "description": "Ask Trace Analyst about your business data from Cursor."
+  },
+  "plugins": [
+    {
+      "name": "trace",
+      "source": "plugins/trace",
+      "description": "Connects the agent to Trace and teaches it to ask Trace Analyst about the business data and relay the answer faithfully."
+    }
+  ]
+}
