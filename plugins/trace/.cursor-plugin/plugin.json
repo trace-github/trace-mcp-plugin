@@ -1,7 +1,7 @@
 {
   "name": "trace",
   "displayName": "Trace",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Connects the agent to Trace, a metric tree analytics platform, and teaches it to ask Trace Analyst about the business data and relay the answer faithfully.",
   "author": {
     "name": "Trace"
