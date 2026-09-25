@@ -20,9 +20,12 @@ If the tools are missing, do `trace-setup` first.
 
 ## Ask
 
-`ask_trace` parameters:
+`ask_trace` sends something to the chat and returns within about thirty seconds: the first
+reply, or an acknowledgement that an investigation has started. It opens the Trace panel
+for this question. Parameters:
 
-- `message` - the user's question, verbatim. Omit to only collect new results.
+- `message` - the user's question, or their answer to a clarifying question, verbatim.
+  Required.
 - `chatId` - the chat to continue. Pass it on every call about the same topic.
 - `newChat` - true when the user changes topic. Ignored when `chatId` is given.
 - `waitSeconds` - upper bound on this call's wait. Can only shorten the server's budget.
@@ -31,6 +34,18 @@ If the tools are missing, do `trace-setup` first.
 A new chat must carry a `message`. Trace Analyst picks the tree, dates and segmentation
 itself, so do not name node ids or build a query.
 
+## Wait
+
+`poll_trace` waits for what the chat has produced since your last call: replies,
+clarifying questions, the progress of reports being generated, and reports that
+completed. It holds the call up to about a minute and returns as soon as something lands.
+It opens no panel, so it is the call to repeat. Parameters:
+
+- `chatId` - the chat to wait on. Required.
+- `waitSeconds` - upper bound on this call's wait. Leave it unset.
+
+It never asks the chat anything. To ask, or to answer a question, use `ask_trace`.
+
 ## Drive the loop
 
 Each result ends with `relay-instructions` addressed to you. Follow it; it knows this
@@ -38,13 +53,13 @@ chat's state. Where it says to relay something verbatim, reproduce it exactly.
 
 Act on the status:
 
-- `WORKING` - if something is running, call `ask_trace` again now with the same `chatId`
-  and no `message`. The call is how you wait. Do not ask the user whether to keep waiting,
-  do not end your turn, and never present an acknowledgement as the answer. Stop after
-  about ten empty calls. If nothing is running, relay what you have.
+- `WORKING` - if something is running, call `poll_trace` now with the same `chatId`. The
+  call is how you wait. Do not ask the user whether to keep waiting, do not end your turn,
+  and never present an acknowledgement as the answer. Stop after about ten empty calls. If
+  nothing is running, relay what you have.
 - `INPUT_REQUIRED` - relay every question and every option verbatim, in plain text. The
-  user may answer in their own words. Send their answer as `message` with the same
-  `chatId`.
+  user may answer in their own words. Send their answer with `ask_trace` as `message`,
+  with the same `chatId`.
 - `COMPLETED` - relay every message and the full report text. The Trace panel renders the
   charts but not this text.
 - `FAILED` - say the chat could not process the message, and offer to retry.
@@ -54,10 +69,11 @@ Pass on the chat link when a result offers one.
 
 ## Reports
 
-`fetch_report` takes `reportId` as printed, plus an optional `waitSeconds`. It blocks
-until that one report completes, returns it with its charts, and never asks the chat
-anything. Call it again with the same `reportId` to keep waiting. To ask anything, use
-`ask_trace` with the `chatId`.
+`fetch_report` takes the `chatId` and the `reportId` as printed, plus an optional
+`waitSeconds`. Call it once `poll_trace` has reported that report complete: it returns
+the report with its charts and opens the report's own panel. Called early it waits
+briefly, returns the report's progress, and tells you to keep waiting with `poll_trace`.
+It never asks the chat anything. To ask anything, use `ask_trace` with the `chatId`.
 
 ## One topic, one chat
 

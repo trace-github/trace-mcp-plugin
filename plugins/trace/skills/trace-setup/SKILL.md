@@ -13,7 +13,8 @@ inside a result.
 
 ## When the tools are missing
 
-A working connection lists `ask_trace` and `get_trees`, and usually `fetch_report`. If
+A working connection lists `ask_trace`, `poll_trace` and `get_trees`, and usually
+`fetch_report`. If
 they are absent, the host has not connected or has not signed in:
 
 - Claude: Customize, then Connectors, add the Trace connector and sign in.
