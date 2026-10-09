@@ -12,6 +12,10 @@ through your browser. There is no key to copy and nothing to configure.
 
 ## Install in Claude
 
+On Claude.ai or in Claude Desktop, open Customize, then Plugins, add
+`https://github.com/trace-github/trace-mcp-plugin` as a marketplace, then install Trace
+from it.
+
 In Claude Code:
 
 ```
@@ -19,22 +23,12 @@ In Claude Code:
 /plugin install trace@trace
 ```
 
-On Claude.ai or in Claude Desktop, open Customize, then Plugins, add
-`https://github.com/trace-github/trace-mcp-plugin` as a marketplace, then install Trace
-from it.
-
-Run `/mcp`, choose `TraceAnalyst` and sign in when prompted.
+Then run `/mcp`, choose `TraceAnalyst` and sign in when prompted.
 
 ## Install in Cursor
 
 Open Customize, then Plugins, add `https://github.com/trace-github/trace-mcp-plugin` as a
 marketplace and install Trace from it. Sign in when Cursor prompts you.
-
-To connect the server on its own, without the guidance the plugin adds:
-
-```
-cursor://anysphere.cursor-deeplink/mcp/install?name=TraceAnalyst&config=eyJ1cmwiOiJodHRwczovL2FwcC1hcGkuaGVsbG90cmFjZS5hcHAvbWNwIn0=
-```
 
 ## What you can ask
 
