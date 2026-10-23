@@ -31,7 +31,7 @@ next: while a result's status is `WORKING` and something is running, call `poll_
 the same `chatId` instead of ending your turn or asking the user whether to keep waiting.
 The call itself is how you wait. A result never carries a report's text, only a pointer:
 `fetch_report` shows a report once a result reports it complete. Pass the same `chatId` on
-every call about one topic.
+every call, and start a new chat only when the user asks for one.
 
 Relay every message under `messages-for-user` to the user as it arrives, whatever the
 status. The wait itself is not an answer: while work is running, do not present it as done

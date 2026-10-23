@@ -30,8 +30,8 @@ for this question. Parameters:
   their answer to a clarifying question. Required. Never text you composed: `ask_trace_analyst`
   exists only to pass what the user said to Trace. Do not call it to wait or to check on
   progress, and never answer a clarifying question on the user's behalf.
-- `chatId` - the chat to continue. Pass it on every call about the same topic.
-- `newChat` - true when the user changes topic. Ignored when `chatId` is given.
+- `chatId` - the chat to continue. Pass it on every later call, whatever the user asks next.
+- `newChat` - true only when the user asks for a new chat. Ignored when `chatId` is given.
 - `waitSeconds` - upper bound on this call's wait. Can only shorten the server's budget.
   Leave it unset.
 
@@ -64,16 +64,22 @@ Act on the status:
   do not summarise what is still running as findings, do not ask whether to keep waiting,
   and do not end your turn. After about fifteen calls with nothing new, tell the user the
   analysis is taking longer than expected, pass on the chat link if a result offered one,
-  and stop. If nothing is running, relay what you have.
-- `INPUT_REQUIRED` - relay every message under `messages-for-user`, then every question
-  under `questions-for-user` and every option verbatim, in plain text. The user answers in
-  their own words. Send their answer with `ask_trace_analyst` as `userMessage`, with the same
-  `chatId`. Never answer on the user's behalf; wait for them.
-- `COMPLETED` - relay every message in full. A result never carries a report's text: each
-  `<report>` is a pointer. For every report not yet shown, call `fetch_report` with the
-  `chatId` and its `reportId`, then relay that report in full.
-- `FAILED` - say the chat could not process the message, and offer to retry.
-- `CANCELLED` - relay the reason given.
+  and stop. If nothing is running, relay what you have. An `open-question` on a `WORKING`
+  result is still the user's to answer: relay it as below.
+- `WAITING_FOR_USER` - nothing is running and the chat is waiting on the user. Relay every
+  message under `messages-for-user`, then the question under `open-question` and every
+  option verbatim, in plain text. The question comes back on every result while it stands;
+  ask it once. The user answers in their own words. Send their answer with
+  `ask_trace_analyst` as `userMessage`, with the same `chatId`. Never answer on the user's
+  behalf, and never start a new chat to ask it again; wait for them.
+- `IDLE` - nothing is running and no question is waiting. Relay every message in full. A
+  result never carries a report's text: each `<report>` is a pointer. For every report not
+  yet shown, call `fetch_report` with the `chatId` and its `reportId`, then relay that
+  report in full. The chat takes the user's next message on the same `chatId`.
+
+A result marked as an error either refuses the call or reports that the user's message
+failed or was stopped. Relay what it says. A refusal names its cause, such as an unknown
+`chatId`; anything else, offer to retry. The chat stays usable.
 
 Pass on the chat link when a result offers one.
 
@@ -85,11 +91,11 @@ the report with its charts and opens the report's own panel. Called early it wai
 briefly, returns the report's progress, and tells you to keep waiting with `poll_trace`.
 It never asks the chat anything. To ask anything, use `ask_trace_analyst` with the `chatId`.
 
-## One topic, one chat
+## One chat
 
-Reuse the `chatId` so a follow-up reaches the agents that already hold the context. Start
-a new chat only when the user moves on. Do not re-ask what the chat already answered, and
-do not re-run an analysis to check a figure.
+Reuse the `chatId` on every call, follow-ups and new questions alike, so the agents that
+already hold the context hear it. Start a new chat only when the user asks for one. Do not
+re-ask what the chat already answered, and do not re-run an analysis to check a figure.
 
 ## References
 
