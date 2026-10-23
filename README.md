@@ -1,6 +1,6 @@
 # Trace
 
-Ask Trace Analyst about your business data from Claude or Cursor, in plain language.
+Ask Trace Analyst about your business data from Claude, Cursor or Codex, in plain language.
 
 Trace models a business as a metric tree: a headline metric broken down into the inputs
 that drive it. Trace Analyst reads that model, runs the analysis and writes up what it
@@ -29,6 +29,20 @@ Then run `/mcp`, choose `TraceAnalyst` and sign in when prompted.
 
 Open Customize, then Plugins, add `https://github.com/trace-github/trace-mcp-plugin` as a
 marketplace and install Trace from it. Sign in when Cursor prompts you.
+
+## Install in Codex
+
+In the Codex app, add `https://github.com/trace-github/trace-mcp-plugin` as a plugin
+marketplace, then install Trace from it.
+
+From the Codex CLI:
+
+```
+codex plugin marketplace add trace-github/trace-mcp-plugin
+codex plugin add trace@trace
+```
+
+Sign in when Codex prompts you.
 
 ## What you can ask
 

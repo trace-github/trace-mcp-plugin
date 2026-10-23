@@ -1,0 +1,43 @@
+{
+  "name": "trace",
+  "version": "0.5.0",
+  "description": "Connects the agent to Trace, a metric tree analytics platform, and teaches it to ask Trace Analyst about the business data and relay the answer faithfully.",
+  "author": {
+    "name": "Trace",
+    "url": "https://www.hellotrace.io"
+  },
+  "homepage": "https://www.hellotrace.io",
+  "repository": "https://github.com/trace-github/trace-mcp-plugin",
+  "keywords": [
+    "trace",
+    "analytics",
+    "metrics",
+    "metric-tree",
+    "business-intelligence",
+    "mcp"
+  ],
+  "mcpServers": {
+    "TraceAnalyst": {
+      "type": "http",
+      "url": "https://app-api.hellotrace.app/mcp"
+    }
+  },
+  "interface": {
+    "displayName": "Trace",
+    "shortDescription": "Ask Trace Analyst about your business data",
+    "longDescription": "Trace models a business as a metric tree: a headline metric broken down into the inputs that drive it. Trace Analyst reads that model, runs the analysis and writes up what it found. This plugin connects Codex to Trace and teaches it to pass your question through unchanged and give you the answer in full.",
+    "developerName": "Trace",
+    "category": "Data & Analytics",
+    "capabilities": [
+      "Read"
+    ],
+    "websiteURL": "https://www.hellotrace.io",
+    "defaultPrompt": [
+      "What did revenue do last month?",
+      "Why did conversion drop in the last quarter?",
+      "Which segment is holding back growth?"
+    ],
+    "composerIcon": "./assets/logo-square.png",
+    "logo": "./assets/logo-square.png"
+  }
+}
